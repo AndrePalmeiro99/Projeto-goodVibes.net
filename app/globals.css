@@ -25,3 +25,39 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+section {
+  max-width: 800px;
+  margin: 2em auto;
+  padding: 1em;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.gallery-container {
+  width: 90vw;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.gallery-item {
+  width: 200px;
+  height: 200px;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}
+
+.imagem {
+  text-align: center;
+}
