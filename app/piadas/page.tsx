@@ -12,8 +12,6 @@ export default async function Piadas() {
                             <tr>
                                 <th className='w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm'>título</th>
                                 <th className='w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm'>Piada</th>
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody className='text-gray-700'>
