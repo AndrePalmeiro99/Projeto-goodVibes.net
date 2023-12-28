@@ -12,6 +12,8 @@ export default async function Piadas() {
                             <tr>
                                 <th className='w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm'>título</th>
                                 <th className='w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm'>Piada</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody className='text-gray-700'>
@@ -20,12 +22,12 @@ export default async function Piadas() {
                                 <td className='w-1/3 text-left py-3 px-4'>Com um 'oi, tudo bem?'.</td>
                             </tr>
                             <tr>
-                            <td className='w-1/3 text-left py-3 px-4'>O que um zero disse para o oito?</td>
-                            <td className='w-1/3 text-left py-3 px-4'>'Gosto do seu cinto novo!'</td>
+                                <td className='w-1/3 text-left py-3 px-4'>O que um zero disse para o oito?</td>
+                                <td className='w-1/3 text-left py-3 px-4'>'Gosto do seu cinto novo!'</td>
                             </tr>
                             <tr>
-                            <td className='w-1/3 text-left py-3 px-4'>Por que o esqueleto não brigou com ninguém?</td>
-                            <td className='w-1/3 text-left py-3 px-4'>Porque ele não tem estômago para isso!</td> 
+                                <td className='w-1/3 text-left py-3 px-4'>Por que o esqueleto não brigou com ninguém?</td>
+                                <td className='w-1/3 text-left py-3 px-4'>Porque ele não tem estômago para isso!</td>
                             </tr>
                         </tbody>
                     </table>
