@@ -3,7 +3,7 @@ import { Piada } from "../domain/piadas";
 
 export async function getPiadas() {
     try {
-        const consulta = await sql<Piada[]>`SELECT * FROM piadas ORDER BY nome`;
+        const consulta = await sql<Piada[]>`SELECT * FROM piadas ORDER BY titulo`;
         return consulta.rows;
     } catch (erro) {
         console.error('Erro na consulta de piadas:', erro);
@@ -24,7 +24,7 @@ export async function getPiada(id: string) {
 export async function inserirPiada(piada: Piada) {
     try {
         const consulta = await sql<Piada>`
-            INSERT INTO piada 
+            INSERT INTO piadas 
             ("titulo", "descricao")
             VALUES (${piada.titulo}, ${piada.descricao})
             RETURNING id, titulo, descricao
@@ -52,7 +52,7 @@ export async function editarPiada(piada: Piada) {
     try {
         await sql`UPDATE piadas
         SET titulo=${piada.titulo},  
-        descricao=${piada.titulo},
+        descricao=${piada.descricao}
         WHERE id=${piada.id}
         `;
     } catch (erro) {

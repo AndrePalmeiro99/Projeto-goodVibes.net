@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Piada } from '../domain/piadas';
+import { Frase } from '../domain/frases';
 
-export default function TelaPiada() {
+export default function TelaFrase() {
 
-    const [piadas, setPiadas] = useState<Piada[]>([]);
-    const [piada, setPiada] = useState<Piada>({ id: "", titulo: "", descricao: "" });
+    const [frases, setFrases] = useState<Frase[]>([]);
+    const [frase, setFrase] = useState<Frase>({ id: "", texto: ""});
     const [mensagem, setMensagem] = useState("");
 
     const handleSelect = async () => {
-        const response = await fetch('/api/piadas');
+        const response = await fetch('/api/frases');
         const data = await response.json();
-        setPiadas(data.piadas);
+        setFrases(data.frases);
     }
 
     useEffect(() => {
@@ -23,69 +23,65 @@ export default function TelaPiada() {
         let target = event.target as HTMLInputElement;
         const fieldName = target.name;
         const fieldValue = target.value;
-        setPiada((objetoAtual) => {
+        setFrase((objetoAtual) => {
             return { ...objetoAtual, [fieldName]: fieldValue }
         });
         setMensagem("");
     };
 
     const handleSave = async (event: React.FormEvent<EventTarget>) => {
-        if (piada.id.length > 0) {
-            await fetch(`/api/piadas/${piada.id}`, {
+        if (frase.id.length > 0) {
+            await fetch(`/api/frases/${frase.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(piada),
+                body: JSON.stringify(frase),
             })
                 .then((response) => response.json())
                 .then((data) => setMensagem(data.mensagem));
         } else {
-            await fetch('/api/piadas', {
+            await fetch('/api/frases', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(piada),
+                body: JSON.stringify(frase),
             })
                 .then((response) => response.json())
                 .then((data) => setMensagem(data.mensagem));
         }
-        setPiada({ id: "", titulo: "", descricao: "" });
+        setFrase({ id: "", texto: ""});
         handleSelect();
     }
 
     const handleEdit = async (event: React.FormEvent<EventTarget>) => {
         let target = event.target as HTMLButtonElement;
         let id = target.value;
-        await fetch(`/api/piadas/${id}`, {
+        await fetch(`/api/frases/${id}`, {
             method: 'GET',
         })
             .then(response => response.json())
-            .then(data => setPiada(data.piada));
+            .then(data => setFrase(data.frase));
     }
 
     const handleDelete = async (event: React.FormEvent<EventTarget>) => {
         let target = event.target as HTMLButtonElement;
         let id = target.value;
-        await fetch(`/api/piadas/${id}`, {
+        await fetch(`/api/frases/${id}`, {
             method: 'DELETE',
         }).then(response => response.json()).then(data => setMensagem(data.mensagem));
-        setPiada({ id: "", titulo: "", descricao: "" });
+        setFrase({ id: "", texto: ""});
         handleSelect();
     }
 
     return (
         <div className='flex-1 rounded-lg bg-gray-50 px-4 pb-4 pt-8'>
             <form className="max-w-sm mx-auto">
-                <input name='id' value={piada.id} onChange={handleChange} className="invisible" />
+                <input name='id' value={frase.id} onChange={handleChange} className="invisible" />
                 <div className="mb-5">
-                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Título da piada</label>
-                    <input name="titulo" value={piada.titulo} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" placeholder="Título" />
-                </div>
-                <div className="mb-5">
-                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Descrição da piada</label>
-                    <input name="descricao" value={piada.descricao} onChange={handleChange} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type='text' placeholder="descrição" />
+                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Título da frase</label>
+                    <input name="titulo" value={frase.texto} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" placeholder="Título" />
                 </div>
                 <div className="mb-5 flex justify-center items-center">
                     <button onClick={handleSave} className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
@@ -99,19 +95,18 @@ export default function TelaPiada() {
                 <thead className="bg-gray-800 text-white">
                     <tr>
                         <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">título</th>
-                        <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Piada</th>
+                        <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Frase</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody className="text-gray-700">
-                    {piadas &&
-                        piadas.map((item) =>
+                    {frases &&
+                        frases.map((item) =>
                             <tr key={item.id}>
-                                <td className="w-1/3 text-left py-3 px-4">{item.titulo}</td>
-                                <td className="w-1/3 text-left py-3 px-4">{item.descricao}</td>
+                                <td className="w-1/3 text-left py-3 px-4">{item.texto}</td>
                                 <td><button onClick={handleEdit} value={item.id} className="bg-gray-800 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">E</button></td>
-                                <td><button onClick={handleDelete} value={item.id} className="bg-gray-800 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">X</button></td>
+                                <td><button onClick={handleDelete} value={item.id} className="bg-gray-800 hover.bg-gray-400 text-white font-bold py-2 px-4 rounded">X</button></td>
                             </tr>
                         )
                     }

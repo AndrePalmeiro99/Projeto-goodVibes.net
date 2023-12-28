@@ -17,5 +17,5 @@ export async function POST(request: Request) {
   }catch(error) {
     return Response.json({ error });
   }  
-  return Response.json({ mensagem: "Piada Incluído com sucesso" });
+  return Response.json({ mensagem: "Piada Incluída com sucesso" });
 }
