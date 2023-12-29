@@ -27,7 +27,7 @@ export async function inserirFrase(frase: Frase) {
             INSERT INTO frases 
             ("texto")
             VALUES (${frase.texto})
-            RETURNING id, titulo, descricao
+            RETURNING id, texto
         `;
         return consulta.rows[0];
     } catch (erro) {

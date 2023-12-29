@@ -6,7 +6,7 @@ import { Frase } from '../domain/frases';
 export default function TelaFrase() {
 
     const [frases, setFrases] = useState<Frase[]>([]);
-    const [frase, setFrase] = useState<Frase>({ id: "", texto: ""});
+    const [frase, setFrase] = useState<Frase>({ id: "", texto: "" });
     const [mensagem, setMensagem] = useState("");
 
     const handleSelect = async () => {
@@ -51,7 +51,7 @@ export default function TelaFrase() {
                 .then((response) => response.json())
                 .then((data) => setMensagem(data.mensagem));
         }
-        setFrase({ id: "", texto: ""});
+        setFrase({ id: "", texto: "" });
         handleSelect();
     }
 
@@ -71,17 +71,20 @@ export default function TelaFrase() {
         await fetch(`/api/frases/${id}`, {
             method: 'DELETE',
         }).then(response => response.json()).then(data => setMensagem(data.mensagem));
-        setFrase({ id: "", texto: ""});
+        setFrase({ id: "", texto: "" });
         handleSelect();
     }
 
     return (
         <div className='flex-1 rounded-lg bg-gray-50 px-4 pb-4 pt-8'>
+            <h1 className="mb-4 font-extrabold leading-none tracking-tight lg:text-2xl mx-auto text-center">
+                Sistema de envio de frases!
+            </h1>
             <form className="max-w-sm mx-auto">
                 <input name='id' value={frase.id} onChange={handleChange} className="invisible" />
                 <div className="mb-5">
-                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Título da frase</label>
-                    <input name="titulo" value={frase.texto} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" placeholder="Título" />
+                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Frase Motivacional</label>
+                    <input name="texto" value={frase.texto} onChange={handleChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" type="text" placeholder="frase" />
                 </div>
                 <div className="mb-5 flex justify-center items-center">
                     <button onClick={handleSave} className="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
@@ -94,8 +97,7 @@ export default function TelaFrase() {
             <table className="min-w-full bg-white">
                 <thead className="bg-gray-800 text-white">
                     <tr>
-                        <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">título</th>
-                        <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Frase</th>
+                        <th className="w-1/3 text-left py-3 px-4 uppercase font-semibold ">Frase</th>
                         <th>&nbsp;</th>
                         <th>&nbsp;</th>
                     </tr>
@@ -104,7 +106,7 @@ export default function TelaFrase() {
                     {frases &&
                         frases.map((item) =>
                             <tr key={item.id}>
-                                <td className="w-1/3 text-left py-3 px-4">{item.texto}</td>
+                                <td className="w-2/3 text-left py-3 px-4">{item.texto}</td>
                                 <td><button onClick={handleEdit} value={item.id} className="bg-gray-800 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded">E</button></td>
                                 <td><button onClick={handleDelete} value={item.id} className="bg-gray-800 hover.bg-gray-400 text-white font-bold py-2 px-4 rounded">X</button></td>
                             </tr>

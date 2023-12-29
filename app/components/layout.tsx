@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         </Link>
                         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                             <form action={async () => { 'use server'; await signOut(); }} method="post">
-                                <button className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <button className="m-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                     Logout
                                 </button>
                             </form>
@@ -35,6 +35,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 <li>
                                     <Link href="/logado/piadas" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                                         Piadas
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/logado/frases" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                                        Frases Motivacionais
                                     </Link>
                                 </li>
                             </ul>
